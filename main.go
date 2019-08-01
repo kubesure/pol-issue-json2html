@@ -89,7 +89,7 @@ func processEvent(record e.S3EventRecord) error {
 		return errhtml
 	}
 
-	newKey := "unprocessed/unprocessed_html_" + strconv.Itoa(pm.Data.PolicyNumber) + ".html"
+	newKey := "unprocessed/unprocessed_" + strconv.Itoa(pm.Data.PolicyNumber) + ".html"
 	log.Println(newKey)
 
 	pinput := s3.PutObjectInput{
