@@ -52,8 +52,8 @@ func TestCurrentDate(t *testing.T) {
 }
 
 func TestProcessEvent(t *testing.T) {
-	bucket := e.S3Bucket{Name: "kubesure-policyissued"}
-	object := e.S3Object{Key: "unprocessed_1234567890.json"}
+	bucket := e.S3Bucket{Name: "kubesure-cs-1"}
+	object := e.S3Object{Key: "unprocessed/1234567890.json"}
 	r := e.S3EventRecord{}
 	r.S3.Bucket = bucket
 	r.S3.Object = object
