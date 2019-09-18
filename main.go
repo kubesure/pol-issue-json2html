@@ -18,11 +18,13 @@ import (
 	"github.com/aws/aws-sdk-go/service/s3"
 )
 
+//composite struct represent json meta file in S3 bucket put by policy issued event handler
 type polmetadata struct {
 	Email email      `json:"email"`
 	Data  policydata `json:"data"`
 }
 
+//data of the policy issue
 type policydata struct {
 	Name         string `json:"name"`
 	AddressLine1 string `json:"addressLine1"`
@@ -34,6 +36,7 @@ type policydata struct {
 	PolicyNumber int    `json:"policyNumber"`
 }
 
+//email address of the policy holder
 type email struct {
 	From string `json:"from"`
 	To   string `json:"to"`
@@ -58,6 +61,7 @@ func handler(ctx context.Context, event e.S3Event) (string, error) {
 	return fmt.Sprintf("object processed "), nil
 }
 
+//Generates html template for the PDF service for PDF generation
 func processEvent(record e.S3EventRecord) error {
 	sess := session.Must(session.NewSessionWithOptions(session.Options{
 		SharedConfigState: session.SharedConfigEnable,
@@ -108,6 +112,7 @@ func processEvent(record e.S3EventRecord) error {
 	return nil
 }
 
+//generates HTML from policy metadata
 func generateHTML(metaData *polmetadata) ([]byte, error) {
 	fmap := template.FuncMap{
 		"currentdate": currentdate,
