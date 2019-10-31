@@ -1,0 +1,23 @@
+{
+    "LambdaFunctionConfigurations": [
+        {
+          "Id": "esyhealth json put notification",
+          "LambdaFunctionArn": "arn:aws:lambda:us-east-1:708908412990:function:esyhealth-pol-issue-json2html",
+          "Events": [ "s3:ObjectCreated:Put" ],
+          "Filter": {
+            "Key": {
+              "FilterRules": [
+                {
+                  "Name": "prefix",
+                  "Value": "unprocessed"
+                },
+            {
+                  "Name": "suffix",
+                  "Value": "json"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
