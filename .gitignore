@@ -1,2 +1,4 @@
 *.zip
 main
+response.json
+log.txt
