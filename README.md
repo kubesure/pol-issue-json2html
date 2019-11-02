@@ -71,17 +71,17 @@
 3. Create Lambda Function
 
 ```
-    aws lambda create-function --function-name esyhealth-pol-issued-json2html \
+    FUNCTION_ARN=`aws lambda create-function --function-name esyhealth-pol-issued-json2html \
     --zip-file fileb://function.zip \
     --handler main --runtime go1.x \
     --role arn:aws:iam::708908412990:role/lambda_s3_fullaccess \
     --description "Create a html template file from a esyhealth policy issued data" \
-    --tags "role"="lambda" 
+    --tags "role"="lambda" | jq -r .FunctionArn`  
 
     aws lambda delete-function --function-name esyhealth-pol-issued-json2html
 ```
 
-4. Create S3 permission for lambda function
+4. Create S3 permission for lambda function --optional
 
 ```
     aws lambda add-permission --function-name esyhealth-pol-issued-json2html \
@@ -110,7 +110,7 @@
     aws lambda invoke \
     --function-name esyhealth-pol-issued-json2html \
     --log-type Tail log.txt \
-    --payload file://test.json
-    --query 'LogResult' 
+    --payload file://test.json \
+    --query 'LogResult' \
     --output text |  base64 -d
 ```
