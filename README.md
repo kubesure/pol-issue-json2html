@@ -81,7 +81,7 @@
     aws lambda delete-function --function-name esyhealth-pol-issued-json2html
 ```
 
-4. Create S3 permission for lambda function --optional
+4. Create S3 permission for lambda function
 
 ```
     aws lambda add-permission --function-name esyhealth-pol-issued-json2html \
