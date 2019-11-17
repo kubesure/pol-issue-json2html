@@ -1,6 +1,6 @@
 # pol-issue-json2html
 
-### setup Dev
+# Setup Dev
 
 1. Build function zip
     
@@ -10,7 +10,7 @@
     unzip -l function.zip
 ``` 
 
-2. Install AWS CLI and configure aws cli with key and secret
+2. Install AWS CLI and configure aws cli with dev admin key and secret
 
 ```
     pip3 install --upgrade --user awscli
@@ -81,7 +81,7 @@
     aws lambda delete-function --function-name esyhealth-pol-issued-json2html
 ```
 
-4. Create S3 permission for lambda function
+4. Create S3 permission to invoke lambda function on PUT action
 
 ```
     aws lambda add-permission --function-name esyhealth-pol-issued-json2html \
@@ -113,4 +113,11 @@
     --payload file://test.json \
     --query 'LogResult' \
     --output text |  base64 -d
+```
+
+7. Update Function
+```
+    aws lambda update-function-code \
+    --function-name esyhealth-pol-issued-json2html \
+    --zip-file fileb://function.zip
 ```
