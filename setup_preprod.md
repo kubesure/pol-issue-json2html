@@ -10,13 +10,25 @@
 4. Create S3 bucket, permission & folder
 
 ```
-    aws s3api create-bucket --bucket=io.kubesure-esyhealth-policy-issued-preprod --region us-east-1
+    aws s3api create-bucket \
+    --profile preprod_admin  \
+    --bucket=io.kubesure-esyhealth-policy-issued-preprod \
+    --region us-east-1
 
-    aws s3api put-public-access-block --bucket io.kubesure-esyhealth-policy-issued-preprod \
+    aws s3api put-public-access-block \
+    --profile preprod_admin  \
+    --bucket io.kubesure-esyhealth-policy-issued-preprod \
     --public-access-block-configuration BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true
 
-    aws s3api put-object --bucket io.kubesure-esyhealth-policy-issued-preprod --key unprocessed/blank.txt
-    aws s3api put-object --bucket io.kubesure-esyhealth-policy-issued-preprod --key processed/blank.txt    
+    aws s3api put-object \
+    --profile preprod_admin  \
+    --bucket io.kubesure-esyhealth-policy-issued-preprod \
+    --key unprocessed/blank.txt
+
+    aws s3api put-object \
+    --profile preprod_admin  \
+    --bucket io.kubesure-esyhealth-policy-issued-preprod \
+    --key processed/blank.txt    
 ```
 
 2. Create lambda exection role 'lambda_s3_fullaccess' add policies s3 full & Lambda access
@@ -41,19 +53,21 @@
 
 ```
     IAM_ROLE_ARN_LAMBDA=`aws iam create-role \
-    --profile dev_admin \
+    --profile preprod_admin \
  	--role-name "lambda_s3_fullaccess" \
  	--assume-role-policy-document file://role_lambda.json | jq -r .Role.Arn`
 ``` 
 
 ```
     aws iam attach-role-policy \
-    --profile dev_admin  \
+    --profile preprod_admin  \
  	--role-name "lambda_s3_fullaccess" \
  	--policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess
 
+    
+
     aws iam attach-role-policy \
-    --profile dev_admin      \
+    --profile preprod_admin      \
  	--role-name "lambda_s3_fullaccess" \
  	--policy-arn arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
 ```
