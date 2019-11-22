@@ -58,7 +58,7 @@ func handler(ctx context.Context, event e.S3Event) (string, error) {
 		}
 	}
 
-	return fmt.Sprintf("object processed "), nil
+	return fmt.Sprintf("HTML generated sucessfully..."), nil
 }
 
 //Generates html template for the PDF service for PDF generation
