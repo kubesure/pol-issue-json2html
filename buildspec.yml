@@ -1,0 +1,11 @@
+version: 0.2
+phases:
+  build:
+    commands:
+      - go build main.go
+  post_build:
+    commands:
+      - zip function.zip main esyhealth-pdf.html    
+artifacts:
+  files:
+    - function.zip
