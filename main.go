@@ -49,8 +49,8 @@ func main() {
 func handler(ctx context.Context, event e.S3Event) (string, error) {
 
 	for _, record := range event.Records {
-		log.Println("bucket" + record.S3.Bucket.Name)
-		log.Println("object " + record.S3.Object.Key)
+		log.Println("Bucket..." + record.S3.Bucket.Name)
+		log.Println("Key...... " + record.S3.Object.Key)
 		err := processEvent(record)
 		if err != nil {
 			log.Println(err)
